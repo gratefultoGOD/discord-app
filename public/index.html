@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div class="header-info">
+                    <h2>Kuran Dersi</h2>
+                    <span class="room-status"><i class="fas fa-circle"></i> Live</span>
+                </div>
+                <div class="header-actions">
+                    <button id="toggleMic" class="control-button" disabled>
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="toggleCamera" class="control-button" disabled>
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="joinCall" class="call-button">
+                        <i class="fas fa-phone"></i> Join Call
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Grid -->
+            <div id="video-grid" class="video-grid"></div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Type a message...">
+                <button id="send-message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Participants Sidebar -->
+        <div class="participants-sidebar">
+            <div class="participants-header">
+                <h3><i class="fas fa-users"></i> Online - <span id="participant-count">0</span></h3>
+            </div>
+            <div class="participants-list" id="participants-list">
+                <!-- Participants will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Modal -->
+    <div class="modal" id="room-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-video modal-icon"></i>
+                <h2>Join Discord Clone</h2>
+                <p class="modal-subtitle">Enter your name to join the room</p>
+            </div>
+            <input type="text" id="username-input" placeholder="Enter your username">
+            <button id="join-room-button">
+                <i class="fas fa-sign-in-alt"></i> Join Room
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
