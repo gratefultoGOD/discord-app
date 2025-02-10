@@ -4,9 +4,10 @@ const socket = io('/');
 // Initialize PeerJS
 const peer = new Peer(undefined, {
     host: window.location.hostname,
-    port: 443,
+    port: 80,
     path: '/peerjs',
-    secure: true,
+    secure: false,
+    debug: 3,
     config: {
         iceServers: [
             { urls: 'stun:stun.l.google.com:19302' },

@@ -7,7 +7,7 @@ const io = require('socket.io')(server, {
         methods: ['GET', 'POST']
     }
 });
-const { PeerServer } = require('peer');
+const { ExpressPeerServer } = require('peer');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
@@ -17,13 +17,14 @@ app.use(cors());
 app.use(express.static('public'));
 
 // Create a PeerServer for handling WebRTC connections
-const peerServer = PeerServer({ 
-    port: 9000,
+const peerServer = ExpressPeerServer(server, {
     path: '/peerjs',
     proxied: true,
-    ssl: true,
     allow_discovery: true
 });
+
+// Use PeerServer
+app.use('/', peerServer);
 
 // Store participants and their usernames
 const participants = new Map(); // Map<userId, username>
