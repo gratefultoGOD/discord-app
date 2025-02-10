@@ -20,6 +20,7 @@ app.use(express.static('public'));
 const peerServer = ExpressPeerServer(server, {
     path: '/peerjs',
     proxied: true,
+    ssl: true,
     allow_discovery: true
 });
 
