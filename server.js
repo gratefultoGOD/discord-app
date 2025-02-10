@@ -5,7 +5,9 @@ const io = require('socket.io')(server, {
     cors: {
         origin: '*',
         methods: ['GET', 'POST']
-    }
+    },
+    allowEIO3: true,
+    transports: ['polling', 'websocket']
 });
 const { ExpressPeerServer } = require('peer');
 const cors = require('cors');
@@ -21,11 +23,21 @@ const peerServer = ExpressPeerServer(server, {
     path: '/peerjs',
     proxied: true,
     ssl: true,
-    allow_discovery: true
+    allow_discovery: true,
+    debug: true
 });
 
 // Use PeerServer
 app.use('/', peerServer);
+
+// Handle PeerJS errors
+peerServer.on('connection', (client) => {
+    console.log('PeerJS client connected:', client.getId());
+});
+
+peerServer.on('disconnect', (client) => {
+    console.log('PeerJS client disconnected:', client.getId());
+});
 
 // Store participants and their usernames
 const participants = new Map(); // Map<userId, username>

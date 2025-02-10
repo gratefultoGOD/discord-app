@@ -1,5 +1,10 @@
 // Initialize Socket.IO
-const socket = io('/');
+const socket = io('/', {
+    transports: ['polling', 'websocket'],
+    forceNew: true,
+    reconnectionAttempts: 5,
+    timeout: 10000
+});
 
 // Initialize PeerJS
 const peer = new Peer(undefined, {
@@ -15,6 +20,16 @@ const peer = new Peer(undefined, {
             { urls: 'stun:stun2.l.google.com:19302' }
         ]
     }
+});
+
+// Handle PeerJS connection errors
+peer.on('error', (err) => {
+    console.error('PeerJS error:', err);
+});
+
+// Wait for peer connection before proceeding
+peer.on('open', (id) => {
+    console.log('My peer ID is:', id);
 });
 
 let currentUser = null;
